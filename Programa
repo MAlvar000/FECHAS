@@ -1,0 +1,41 @@
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+
+public class FechasEnJava {
+
+    public static void main(String[] args) {
+        // Formateador para la fecha y hora en formato de España
+        DateTimeFormatter formatoEspanol = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm:ss");
+
+        // 1. La fecha actual local
+        LocalDate fechaActualLocal = LocalDate.now();
+        System.out.println("Fecha actual local: " + fechaActualLocal);
+
+        // 2. La fecha actual en Caracas
+        LocalDateTime fechaActualCaracas = LocalDateTime.now(ZoneId.of("America/Caracas"));
+        System.out.println("Fecha actual en Caracas: " + fechaActualCaracas.toLocalDate());
+
+        // 3. Los años transcurridos desde el descubrimiento de América
+        LocalDate descubrimientoAmerica = LocalDate.of(1492, 10, 12);
+        Period periodo = Period.between(descubrimientoAmerica, fechaActualLocal);
+        System.out.println("Años transcurridos desde el descubrimiento de América: " + periodo.getYears());
+
+        // 4. La hora actual local
+        LocalTime horaActualLocal = LocalTime.now();
+        System.out.println("Hora actual local: " + horaActualLocal);
+
+        // 5. La hora actual en Caracas
+        LocalTime horaActualCaracas = LocalTime.now(ZoneId.of("America/Caracas"));
+        System.out.println("Hora actual en Caracas: " + horaActualCaracas);
+
+        // 6. Las horas de diferencia entre Madrid y Caracas
+        ZonedDateTime zonaMadrid = ZonedDateTime.now(ZoneId.of("Europe/Madrid"));
+        ZonedDateTime zonaCaracas = ZonedDateTime.now(ZoneId.of("America/Caracas"));
+        long diferenciaHoras = Duration.between(zonaCaracas, zonaMadrid).toHours();
+        System.out.println("Diferencia horaria entre Madrid y Caracas: " + diferenciaHoras + " horas");
+
+        // 7. La fecha y la hora cuando Neil Armstrong pisó la luna
+        LocalDateTime neilArmstrongLuna = LocalDateTime.of(1969, 7, 21, 3, 56);
+        System.out.println("Neil Armstrong pisó la luna el: " + neilArmstrongLuna.format(formatoEspanol));
+    }
+}
